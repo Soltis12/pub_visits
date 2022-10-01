@@ -11,3 +11,4 @@ streamlit.header("Visualizing Happiness in 2022")
 streamlit.text("This tool is built to demonstrate usage of Snowflake, Python and APIs to import, clean, append to and visualize data")
 
 ## Connect to Snowflake
+#
