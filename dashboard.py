@@ -15,7 +15,7 @@ streamlit.text("to import, clean, append to and visualize data")
 
 ## GLOBAL VARIABLES
 # Headers for the PUBS_VISITED Snowflake table
-v_snowflake_columns = ['Pub Name' 'City', 'Visit Date', 'Latitude', 'Longitude', 'Post Code', 'Post Code Area']
+v_snowflake_columns = ['Pub Name', 'City', 'Visit Date', 'Latitude', 'Longitude', 'Post Code', 'Post Code Area']
 
 ## DEFINE FUNCTIONS
 # Function to display the table
