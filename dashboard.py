@@ -16,7 +16,9 @@ streamlit.text("to import, clean, append to and visualize data")
 ## GLOBAL VARIABLES
 # Headers for the PUBS_VISITED Snowflake table
 v_snowflake_columns = ['Pub Name', 'City', 'Visit Date', 'Latitude', 'Longitude', 'Post Code', 'Post Code Area']
-
+v_snowflake_entry_pub = 0
+v_snowflake_entry_city = 0
+v_snowflake_entry_date = 0
 
 ## DEFINE FUNCTIONS
 # Function to display the table
@@ -59,36 +61,22 @@ try:
 except URLError as e:
   streamlit.error()
 
-# Add a pub visit to the Snowflake table
+# Add a pub visit to the Snowflake table 1: Pub Name
 try:
   pub_entry = streamlit.text_input("What's the name of the pub?")
   if not pub_entry:
-        streamlit.error("Please enter a pub name to continue")
+    streamlit.error("Please enter a pub name to continue")
   else:
     try:
-        city_entry = streamlit.text_input("What town or city is it in (or nearest to)?")
-        if not city_entry:
-            streamlit.error("Please enter a city name to continue") 
-            else:
-                try:
-                    date_entry = streamlit.date_input("When did you visit?")
-                    if not date_entry:
-                        streamlit.error("Please enter a date to continue")  
-                        else:
-                            try:
-                                upload_entry = streamlit.selectbox('Add details to database?',['Yes','No'])
-                                if upload_entry = 'Yes':
-                                    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-                                    add_pub(pub_entry, city_entry, date_entry)
-                                    my_cnx.close
-                                else streamlit.text('Not added to database')
-                             except URLError as e:
-                                 streamlit.error()
-                 except URLError as e:
-                     streamlit.error()
+      city_entry = streamlit.text_input("Which town or city is it in / nearest to?")
+      if not city_entry:
+        streamlit.error("Please enter a city name to continue")
+      else:
+        try:
+          date_entry = streamlit.date_input("When was your visit?")
         except URLError as e:
-         streamlit.error()  
+          streamlit.error()        
+    except URLError as e:
+      streamlit.error()
 except URLError as e:
   streamlit.error()
-
-# Next Code 
