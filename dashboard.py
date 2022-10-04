@@ -9,7 +9,7 @@ from urllib.error import URLError
 ## WELCOME TEXT
 streamlit.title("🍺 Holly's Pub Visits 🍹")
 streamlit.header("Visualizing Happiness in 2022")
-streamlit.text("This tool is built to demonstrate usage of Snowflake, Python and APIs)
+streamlit.text("This tool is built to demonstrate usage of Snowflake, Python and APIs")
 streamlit.text("to import, clean, append to and visualize data")
 
 
