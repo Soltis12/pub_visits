@@ -44,7 +44,7 @@ if streamlit.button('Display Pub Visits'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_data_rows = get_snowflake_data()
     my_cnx.close
-    streamlit.dataframe(my_data_rows, columns = v_snowflake_columns)
+    streamlit.dataframe(my_data_rows)
 
 # Return data about a specific pub from Snowflake, if entered
 try:
@@ -55,7 +55,7 @@ try:
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_data_rows = get_snowflake_data_pub(pub_name)
     my_cnx.close
-    streamlit.dataframe(my_data_rows, columns = v_snowflake_columns)
+    streamlit.dataframe(my_data_rows)
 except URLError as e:
   streamlit.error()
 
