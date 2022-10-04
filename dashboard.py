@@ -52,4 +52,6 @@ try:
     streamlit.error('Please enter a pub name to get information')
   else:
     back_from_function = get_snowflake_data_pub(pub_entry)
-    streamlit.dataframe(back_from_function, columns = v_snowflake_columns)   
+    streamlit.dataframe(back_from_function, columns = v_snowflake_columns)
+
+# Next Code
