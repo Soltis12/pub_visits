@@ -64,30 +64,30 @@ try:
   pub_entry = streamlit.text_input("What's the name of the pub?")
   if not pub_entry:
         streamlit.error("Please enter a pub name to continue")
-        else:
-            try:
-                city_entry = streamlit.text_input("What town or city is it in (or nearest to)?")
-                if not city_entry:
-                    streamlit.error("Please enter a city name to continue") 
-                else:
-                    try:
-                        date_entry = streamlit.date_input("When did you visit?")
-                        if not date_entry:
-                            streamlit.error("Please enter a date to continue")  
-                            else:
-                                try:
-                                    upload_entry = streamlit.selectbox('Add details to database?',['Yes','No'])
-                                    if upload_entry = 'Yes':
-                                        my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-                                        add_pub(pub_entry, city_entry, date_entry)
-                                        my_cnx.close
-                                    else streamlit.text('Not added to database')
-                                except URLError as e:
-                                    streamlit.error()
-                    except URLError as e:
-                        streamlit.error()
-           except URLError as e:
-            streamlit.error()  
+  else:
+    try:
+        city_entry = streamlit.text_input("What town or city is it in (or nearest to)?")
+        if not city_entry:
+            streamlit.error("Please enter a city name to continue") 
+            else:
+                try:
+                    date_entry = streamlit.date_input("When did you visit?")
+                    if not date_entry:
+                        streamlit.error("Please enter a date to continue")  
+                        else:
+                            try:
+                                upload_entry = streamlit.selectbox('Add details to database?',['Yes','No'])
+                                if upload_entry = 'Yes':
+                                    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+                                    add_pub(pub_entry, city_entry, date_entry)
+                                    my_cnx.close
+                                else streamlit.text('Not added to database')
+                             except URLError as e:
+                                 streamlit.error()
+                 except URLError as e:
+                     streamlit.error()
+        except URLError as e:
+         streamlit.error()  
 except URLError as e:
   streamlit.error()
 
