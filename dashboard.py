@@ -74,6 +74,9 @@ try:
       else:
         try:
           date_entry = streamlit.date_input("When was your visit?")
+          my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+          my_data_rows = add_pub(pub_entry, city_entry, date_entry)
+          my_cnx.close
         except URLError as e:
           streamlit.error()        
     except URLError as e:
