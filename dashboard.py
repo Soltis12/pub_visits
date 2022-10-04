@@ -53,5 +53,6 @@ try:
   else:
     back_from_function = get_snowflake_data_pub(pub_entry)
     streamlit.dataframe(back_from_function, columns = v_snowflake_columns)
-
+except URLError as e:
+  streamlit.error()
 # Next Code
