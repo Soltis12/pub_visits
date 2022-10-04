@@ -1,24 +1,55 @@
-## Import packages
+## IMPORT PACKAGES
 import streamlit
 import pandas
 import snowflake.connector
 import requests
 from urllib.error import URLError
 
-## Opening text
+
+## WELCOME TEXT
 streamlit.title("🍺 Holly's Pub Visits 🍹")
 streamlit.header("Visualizing Happiness in 2022")
-streamlit.text("This tool is built to demonstrate usage of Snowflake, Python and APIs to import, clean, append to and visualize data")
+streamlit.text("This tool is built to demonstrate usage of Snowflake, Python and APIs)
+streamlit.text("to import, clean, append to and visualize data")
 
+
+## GLOBAL VARIABLES
+# Headers for the PUBS_VISITED Snowflake table
+v_snowflake_columns = ['Pub Name' 'City', 'Visit Date', 'Latitude', 'Longitude', 'Post Code', 'Post Code Area']
+
+## DEFINE FUNCTIONS
 # Function to display the table
 def get_snowflake_data():
     with my_cnx.cursor() as my_cur:
         my_cur.execute("SELECT * FROM PUBS_VISITED")
         return my_cur.fetchall()
 
-## Load the data from Snowflake as a Pandas DataFrame
+# Function to add new pubs to the dataset
+def add_pub(pub_name, city_name, date):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("INSERT INTO PUBS_VISITED VALUES ('"+pub_name+"'+', '+'"+city_name+"', '+'"+date+"'+', NULL, NULL, NULL, NULL, NULL')")
+        return ('Thank you for adding ' + pub_name + ', ' + city_name + ' to the pub list)
+
+# Function to search for a pub
+def get_snowflake_data_pub():
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("SELECT * FROM PUBS_VISITED WHERE PUB_NAME = '"+pub_name+"'+'")
+        return my_cur.fetchall()
+                
+
+## USER INTERACTIVE FEATURES
+# Load the data from Snowflake as a Pandas DataFrame
 if streamlit.button('Display Pub Visits'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_data_rows = get_snowflake_data()
     my_cnx.close
-    streamlit.dataframe(my_data_rows)
+    streamlit.dataframe(my_data_rows, columns = v_snowflake_columns)
+
+# Return data about a specific pub
+try:
+  pub_entry = streamlit.text_input('What pub would you ike inforation about','The Imperial')
+  if not pub_entry:
+    streamlit.error('Please enter a pub name to get information')
+  else:
+    back_from_function = get_snowflake_data_pub(pub_entry)
+    streamlit.dataframe(back_from_function, columns = v_snowflake_columns)   
