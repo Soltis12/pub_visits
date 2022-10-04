@@ -34,7 +34,7 @@ def add_pub(pub_name, city_name, date):
 # Function to search for a pub
 def get_snowflake_data_pub(pub_name):
     with my_cnx.cursor() as my_cur:
-        my_cur.execute("SELECT * FROM PUBS_VISITED WHERE PUB_NAME = '"+pub_name+"'")
+        my_cur.execute("SELECT * FROM PUBS_VISITED WHERE PUB_NAME = "+pub_name+"")
         return my_cur.fetchall()
                 
 
@@ -53,9 +53,9 @@ try:
     streamlit.error('Please enter a pub name to get information')
   else:
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    back_from_function = get_snowflake_data_pub(pub_entry)
+    my_data_rows = get_snowflake_data_pub(pub_entry)
     my_cnx.close
-    streamlit.dataframe(back_from_function, columns = v_snowflake_columns)
+    streamlit.dataframe(my_data_rows, columns = v_snowflake_columns)
 except URLError as e:
   streamlit.error()
 
