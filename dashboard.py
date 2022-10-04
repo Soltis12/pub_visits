@@ -28,7 +28,7 @@ def get_snowflake_data():
 # Function to add new pubs to the dataset
 def add_pub(pub_name, city_name, date):
     with my_cnx.cursor() as my_cur:
-        my_cur.execute("INSERT INTO PUBS_VISITED VALUES ('"+pub_name+"'+', '+'"+city_name+"', '+'"+date+"'+', NULL, NULL, NULL, NULL, NULL')")
+        my_cur.execute("INSERT INTO PUBS_VISITED VALUES ('"+pub_name+"', '"+city_name+"', '"+date+"', NULL, NULL, NULL, NULL, NULL')")
         return ('Thank you for adding ' + pub_name + ', ' + city_name + ' to the pub list')
 
 # Function to search for a pub
@@ -59,4 +59,4 @@ try:
 except URLError as e:
   streamlit.error()
 
-# Next Code
+# Next Code , columns = v_snowflake_columns
