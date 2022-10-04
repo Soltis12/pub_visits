@@ -52,7 +52,9 @@ try:
   if not pub_entry:
     streamlit.error('Please enter a pub name to get information')
   else:
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     back_from_function = get_snowflake_data_pub(pub_entry)
+    my_cnx.close
     streamlit.dataframe(back_from_function, columns = v_snowflake_columns)
 except URLError as e:
   streamlit.error()
