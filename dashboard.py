@@ -28,7 +28,7 @@ def get_snowflake_data():
 def add_pub(pub_name, city_name, date):
     with my_cnx.cursor() as my_cur:
         my_cur.execute("INSERT INTO PUBS_VISITED VALUES ('"+pub_name+"'+', '+'"+city_name+"', '+'"+date+"'+', NULL, NULL, NULL, NULL, NULL')")
-        return ('Thank you for adding ' + pub_name + ', ' + city_name + ' to the pub list)
+        return ('Thank you for adding ' + pub_name + ', ' + city_name + ' to the pub list')
 
 # Function to search for a pub
 def get_snowflake_data_pub():
