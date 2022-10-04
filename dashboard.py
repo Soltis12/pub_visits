@@ -34,7 +34,7 @@ def add_pub(pub_name, city_name, date):
 # Function to search for a pub
 def get_snowflake_data_pub(pub_name):
     with my_cnx.cursor() as my_cur:
-        my_cur.execute("SELECT * FROM PUBS_VISITED WHERE PUB_NAME = "+pub_name+"")
+        my_cur.execute("SELECT * FROM PUBS_VISITED WHERE PUB_NAME = '"+pub_name+"'")
         return my_cur.fetchall()
                 
 
